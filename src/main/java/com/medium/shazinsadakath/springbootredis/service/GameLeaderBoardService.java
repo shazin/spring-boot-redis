@@ -26,4 +26,8 @@ public class GameLeaderBoardService {
                 .stream().map(e -> new Gamer(e.getValue(), e.getScore()))
                 .collect(Collectors.toList());
     }
+
+    public void deleteAll() {
+        zSetOperations.getOperations().delete("leaderboard");
+    }
 }
