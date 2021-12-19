@@ -7,7 +7,7 @@ import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,11 +19,11 @@ public class GameLeaderBoardService {
     @Resource(name = "redisTemplate")
     private ZSetOperations<String, String> zSetOperations;
 
-    public Set<Gamer> add(Gamer gamer) {
+    public List<Gamer> add(Gamer gamer) {
         zSetOperations.add("leaderboard", gamer.getName(), gamer.getRank());
 
         return zSetOperations.rangeWithScores("leaderboard" ,0,10)
                 .stream().map(e -> new Gamer(e.getValue(), e.getScore()))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }

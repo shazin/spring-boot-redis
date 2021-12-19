@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequestMapping("/gameleaderboard")
@@ -18,7 +18,7 @@ public class GameLeaderBoardController {
     private GameLeaderBoardService gameLeaderBoardService;
 
     @PostMapping
-    public Set<Gamer> add(@RequestBody Gamer gamer) {
+    public List<Gamer> add(@RequestBody Gamer gamer) {
         return gameLeaderBoardService.add(gamer);
     }
 
